@@ -1,0 +1,63 @@
+mode: "resnet50_cifar_100"
+
+gpus: 1
+
+dataset_config:
+  img_size: [224, 224]
+  input_shape: [224, 224, 3]
+  in_mean: [0.5070751592371323, 0.48654887331495095, 0.4409178433670343]
+  in_std: [0.2673342858792401, 0.2564384629170883, 0.27615047132568404]
+  batch_size: 128
+  n_train_samples: 50000
+  n_val_samples: 10000
+  num_classes: 100
+  num_epochs: 200
+  num_workers: 4
+
+optimizer_config:
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 0.0005
+  loss_fn: 'categorical_crossentropy'
+  gamma: 0.2
+  milestones: [60, 120, 160]
+  warm_up: 1
+
+checkpoint_config:
+  dir: 'logs'
+
+
+#model_config:
+#  use_bn: True
+#  use_bias: False
+#  l2_r: 0.005
+#  activation: relu
+#  pre-load: False
+#  path: "../pretrained_models/rn18/rnv1_normal/ep_00081-loss_0.15-valloss_0.38-val_acc_0.94-val_nb_spikes_0.68.h5"
+
+
+
+
+#
+#history_config:
+#  save_history: False
+#  save_dir: "logs"
+#  records:
+#    history_file: "history.npy"
+#    target_metrics: ['loss',
+#                    'sparse_loss',
+#                    'accuracy',
+#                    'nb_spikes',
+#                    'nb_total_spikes',
+#                    'val_loss',
+#                    'val_sparse_loss',
+#                    'val_accuracy',
+#                    'val_nb_spikes']
+#    check_w_sparsity: False
+#  model_save:
+#    model_name: "ep_{epoch:03d}-accuracy_{accuracy:.4f}-val_accuracy_{val_accuracy:.4f}.h5"
+#    monitor: 'val_accuracy'
+#    save_best_only: True
+#    save_weights_only: False
+#    mode: 'auto'
+
