@@ -106,14 +106,13 @@ if __name__ == '__main__':
 
     """ Load configuration
     """
-    cfg_path = 'configs/resnet152_config.yaml'
+    cfg_path = 'configs/base_config.yaml'
     cfg = load_yaml(cfg_path)
 
 
     """ Build dataloader
     """
     cfg_data = cfg['dataset_config']
-    print(cfg_data['in_mean'], tuple(cfg_data['in_mean']),  type(cfg_data['in_mean']))
     cifar100_training_loader = get_training_dataloader(
         cfg_data['in_mean'],
         cfg_data['in_std'],
@@ -134,8 +133,16 @@ if __name__ == '__main__':
     """
     # from models.resnet import resnet50
     # net = resnet50()
-    from models.resnet import resnet18
-    net = resnet18()
+    # from models.senet import seresnet50
+    # net = seresnet50()
+    # from models.shufflenetv2 import ShuffleNetV2
+    # net = shufflenetv2()
+    # from models.shufflenet import shufflenet
+    # net = shufflenet()
+
+    from models.mobilenet import mobilenet
+    net = mobilenet()
+
     if cfg['gpus']:
         net = net.cuda()
 
