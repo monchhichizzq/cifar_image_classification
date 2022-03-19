@@ -1,0 +1,24 @@
+
+mode: "resnet18"
+
+dataset_config:
+  img_size: [32, 32]
+  batch_size: 128
+  n_train_samples: 50000
+  n_val_samples: 10000
+  num_classes: 100
+  num_epochs: 200
+  num_workers: 32
+
+model_config:
+  pre-load: False
+  path: "../pretrained_models/rn18/rnv1_normal/ep_00081-loss_0.15-valloss_0.38-val_acc_0.94-val_nb_spikes_0.68.h5"
+
+optimizer_config:
+  lr: 0.1
+  momentum: 0.9
+  milestones: [60, 120, 160]
+  warm_up: 1
+
+checkpoint_config:
+  dir: 'logs'

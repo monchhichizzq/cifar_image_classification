@@ -1,0 +1,49 @@
+
+mode: "normal_eval"
+
+dataset_config:
+  img_size: [224, 224]
+  input_shape: [224, 224, 3]
+  batch_size: 64
+  n_train_samples: 50000
+  n_val_samples: 10000
+  num_classes: 100
+  num_epochs: 30000
+
+model_config:
+  use_bn: True
+  use_bias: False
+  l2_r: 0.0001
+  activation: relu
+  pre-load: True # model saved normally
+  count_MACs: True
+  path: "logs/rnv1_normal_old/ep_269-accuracy_0.9673-val_accuracy_0.7262.h5"
+
+weight_config:
+  analyse_sparsity: True
+
+sparsification_config:
+  type: "hoyer" # hoyer/l1
+  adaptive: False
+  add_loss: True
+
+optimizer_config:
+  lr: 0.1
+  momentum: 0.9
+  loss_fn: 'categorical_crossentropy'
+  lr_schedule:
+    monitor: 'val_accuracy'
+    factor: 0.1
+    patience: 10
+
+profiler_config:
+  macs:
+    save_metrics: False
+    verbose: True
+
+
+val_config:
+  verbose: 1
+  epochs: 500
+  nb_workers: 8
+  use_multiprocessing: False
